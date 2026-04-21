@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+    @RequiredArgsConstructor
+
 public class CharacterLibraryServiceImpl implements finalProject.StatWeaver.service.CharacterLibraryService {
 
     private final CharacterRepository characterRepository;
@@ -19,10 +21,7 @@ public class CharacterLibraryServiceImpl implements finalProject.StatWeaver.serv
 
     private final CharacterClassifier classifier = new CharacterClassifier();
 
-    public CharacterLibraryServiceImpl(CharacterRepository characterRepository, CharacterMapper characterMapper) {
-        this.characterRepository = characterRepository;
-        this.characterMapper = characterMapper;
-    }
+
 
     @Override
     public List<CharacterDto> listCharacters() {
