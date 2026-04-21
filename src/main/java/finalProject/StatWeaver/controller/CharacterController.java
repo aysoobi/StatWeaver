@@ -63,15 +63,6 @@ public class CharacterController {
         libraryService.deleteCharacter(id);
         return ResponseEntity.noContent().build();
     }
-
-//    @ExceptionHandler(IllegalArgumentException.class)
-//    public ResponseEntity<String> handleBadRequest(Exception ex) {
-//        return ResponseEntity.badRequest().body(ex.getMessage());
-//    }
-//
-//    @ExceptionHandler(IllegalStateException.class)
-//    public ResponseEntity<String> handleIllegalState(Exception ex) {
-//        return ResponseEntity.badRequest().body(ex.getMessage());
-//    }
+}
 }
 
