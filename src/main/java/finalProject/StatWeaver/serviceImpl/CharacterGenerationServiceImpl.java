@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.*;
 
 @Service
+    @RequiredArgsConstructor
+
 public class CharacterGenerationServiceImpl implements finalProject.StatWeaver.service.CharacterGenerationService {
 
     private static final int MAX_TOTAL_POINTS = 300;
@@ -31,19 +33,6 @@ public class CharacterGenerationServiceImpl implements finalProject.StatWeaver.s
 
     private final CharacterClassifier classifier = new CharacterClassifier();
 
-    public CharacterGenerationServiceImpl(
-            QuestionRepository questionRepository,
-            AnswerRepository answerRepository,
-            CharacterRepository characterRepository,
-            QuestionMapper questionMapper,
-            CharacterMapper characterMapper
-    ) {
-        this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
-        this.characterRepository = characterRepository;
-        this.questionMapper = questionMapper;
-        this.characterMapper = characterMapper;
-    }
 
     @Override
     public StartGenerationResponse getQuestionsForGeneration(int questionCount) {
