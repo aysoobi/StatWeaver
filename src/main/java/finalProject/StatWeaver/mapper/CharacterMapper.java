@@ -30,16 +30,17 @@ public class CharacterMapper {
         int dragon = character.getDragonPercent();
 
         //чтобы выяснить кто доминирует
-        int max = Math.max(elf, Math.max(dwarf, dragon));
-//        dto.setMainType(
-//                max == elf ? "Elf" :
-//                max == dwarf ? "Dwarf" : "Dragon"
-//        );
-        dto.setMainType(switch (max) {
-            case int m when m == elf -> "Elf";
-            case int m when m == dwarf -> "Dwarf";
-            default -> "Dragon";
-        });
+    
+
+    int max = Math.max(elf, Math.max(dwarf, dragon));
+ 
+     if (max == elf) {
+    dto.setMainType("Elf");
+    } else if (max == dwarf) {
+    dto.setMainType("Dwarf");
+    } else {
+    dto.setMainType("Dragon");
+      }
 
         dto.setPowerMultiplier(max / 100.0);
 
