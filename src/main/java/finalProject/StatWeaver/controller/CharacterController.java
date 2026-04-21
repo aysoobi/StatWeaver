@@ -16,15 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+    @RequiredArgsConstructor
+
 public class CharacterController {
 
     private final CharacterGenerationService generationService;
     private final CharacterLibraryService libraryService;
 
-    public CharacterController(CharacterGenerationService generationService, CharacterLibraryService libraryService) {
-        this.generationService = generationService;
-        this.libraryService = libraryService;
-    }
 
     @RequestMapping(value = "/generation/start", method = {RequestMethod.GET, RequestMethod.POST})
     public StartGenerationResponse startGenerationAny(
