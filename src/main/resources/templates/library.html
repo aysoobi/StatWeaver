@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Library</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>Character Library</h1>
+
+        <p><a href="/">Back to main</a> | <a href="/create">Create new</a></p>
+
+        <div id="status" class="error"></div>
+        <div id="characters"></div>
+    </div>
+</div>
+
+<script>
+    const statusEl = document.getElementById('status');
+    const charactersEl = document.getElementById('characters');
+
+    function showError(msg) {
+        statusEl.textContent = msg;
+    }
+
+    function clearStatus() {
+        statusEl.textContent = '';
+    }
+
+    function renderCharacter(c) {
+        const card = document.createElement('div');
+        card.className = 'char-card';
+
+        const typeLine = c.mainType
+            ? (c.mainType + ' (' + c.elfPercent + '% Elf, ' + c.dwarfPercent + '% Dwarf, ' + c.dragonPercent + '% Dragon)')
+            : (c.elfPercent + '% Elf, ' + c.dwarfPercent + '% Dwarf, ' + c.dragonPercent + '% Dragon)');
+
+        card.innerHTML = `
+          <h3>${escapeHtml(c.name || '')}</h3>
+          <div><b>Type:</b> ${escapeHtml(typeLine)}</div>
+          <div><b>Total points:</b> ${c.totalPoints} | <b>Available:</b> ${c.availablePoints}</div>
+          <div class="muted" style="margin-top:8px;"><b>Stats:</b> Int=${c.intelligence}, Str=${c.strength}, Def=${c.defense}, Agi=${c.agility}, Mag=${c.magic}</div>
+
+          <div class="row" style="margin-top:12px;">
+            <button class="btn danger" data-action="delete" data-id="${c.id}">Delete</button>
+            <button class="btn secondary" data-action="rename" data-id="${c.id}">Rename</button>
+          </div>
+
+          <div style="margin-top:12px;">
+            <h4>Spend points (upgrade stats)</h4>
+            <div style="display:grid; gap:8px; grid-template-columns: repeat(5, minmax(0, 1fr));">
+              <label>Интеллект(Int) <input type="number" min="0" value="0" id="int_${c.id}"></label>
+              <label>Сила(Str) <input type="number" min="0" value="0" id="str_${c.id}"></label>
+              <label>Защита(Def) <input type="number" min="0" value="0" id="def_${c.id}"></label>
+              <label>Ловкость(Agi) <input type="number" min="0" value="0" id="agi_${c.id}"></label>
+              <label>Магия(Mag) <input type="number" min="0" value="0" id="mag_${c.id}"></label>
+            </div>
+            <div style="margin-top:8px;">
+              <button class="btn" data-action="spend" data-id="${c.id}">Apply</button>
+            </div>
+          </div>
+        `;
+
+        card.querySelector('[data-action="delete"]').addEventListener('click', async () => {
+            const id = c.id;
+            if (!confirm('Delete character "' + c.name + '"?')) return;
+            const res = await fetch('/api/characters/' + id, {method: 'DELETE'});
+            if (!res.ok) {
+                showError(await res.text());
+                return;
+            }
+            await loadCharacters();
+        });
+
+        card.querySelector('[data-action="rename"]').addEventListener('click', async () => {
+            const id = c.id;
+            const newName = prompt('New name for ' + c.name + ':');
+            if (!newName) return;
+
+            const res = await fetch('/api/characters/' + id, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({name: newName})
+            });
+            if (!res.ok) {
+                showError(await res.text());
+                return;
+            }
+            await loadCharacters();
+        });
+
+        card.querySelector('[data-action="spend"]').addEventListener('click', async () => {
+            const id = c.id;
+            const payload = {
+                intelligence: Number(document.getElementById('int_' + id).value),
+                strength: Number(document.getElementById('str_' + id).value),
+                defense: Number(document.getElementById('def_' + id).value),
+                agility: Number(document.getElementById('agi_' + id).value),
+                magic: Number(document.getElementById('mag_' + id).value)
+            };
+
+            const res = await fetch('/api/characters/' + id + '/spend', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                showError(await res.text());
+                return;
+            }
+            await loadCharacters();
+        });
+
+        return card;
+    }
+
+    function escapeHtml(s) {
+        return String(s)
+            .replaceAll('&', '&amp;')
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;')
+            .replaceAll('"', '&quot;')
+            .replaceAll("'", '&#039;');
+    }
+
+    async function loadCharacters() {
+        clearStatus();
+        const res = await fetch('/api/characters');
+        if (!res.ok) {
+            showError(await res.text());
+            return;
+        }
+        const data = await res.json();
+        charactersEl.innerHTML = '';
+        if (!data || data.length === 0) {
+            charactersEl.textContent = 'No characters yet. Create one!';
+            return;
+        }
+        data.forEach(c => charactersEl.appendChild(renderCharacter(c)));
+    }
+
+    loadCharacters();
+</script>
+</body>
+</html>
+

@@ -1,0 +1,398 @@
+/*:root {*/
+/*    --bg: #0f1221;*/
+/*    --bg-soft: #171b31;*/
+/*    --panel: #1e2442;*/
+/*    --text: #f2f5ff;*/
+/*    --muted: #aeb7d8;*/
+/*    --accent: #7d8dff;*/
+/*    --accent-2: #66e2cc;*/
+/*    --danger: #ff6b7a;*/
+/*    --border: #2d3766;*/
+/*}*/
+
+/** {*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*body {*/
+/*    margin: 0;*/
+/*    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;*/
+/*    background: radial-gradient(circle at top right, #202958 0%, var(--bg) 60%);*/
+/*    color: var(--text);*/
+/*}*/
+
+/*.container {*/
+/*    max-width: 980px;*/
+/*    margin: 32px auto;*/
+/*    padding: 0 16px 40px;*/
+/*}*/
+
+/*.card {*/
+/*    background: linear-gradient(180deg, var(--panel) 0%, var(--bg-soft) 100%);*/
+/*    border: 1px solid var(--border);*/
+/*    border-radius: 14px;*/
+/*    padding: 20px;*/
+/*    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);*/
+/*}*/
+
+/*h1, h2, h3, h4 {*/
+/*    margin-top: 0;*/
+/*}*/
+
+/*p {*/
+/*    color: var(--muted);*/
+/*}*/
+
+/*a {*/
+/*    color: #bfd1ff;*/
+/*}*/
+
+/*.row {*/
+/*    display: flex;*/
+/*    gap: 12px;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.btn, button {*/
+/*    border: 0;*/
+/*    border-radius: 10px;*/
+/*    padding: 10px 16px;*/
+/*    font-weight: 600;*/
+/*    cursor: pointer;*/
+/*    background: linear-gradient(180deg, var(--accent) 0%, #5e70f3 100%);*/
+/*    color: #fff;*/
+/*}*/
+
+/*.btn.secondary {*/
+/*    background: transparent;*/
+/*    border: 1px solid var(--border);*/
+/*    color: var(--text);*/
+/*}*/
+
+/*.btn.danger {*/
+/*    background: linear-gradient(180deg, #ff7381 0%, #e24f5d 100%);*/
+/*}*/
+
+/*input, select {*/
+/*    width: 100%;*/
+/*    background: #111734;*/
+/*    color: var(--text);*/
+/*    border: 1px solid var(--border);*/
+/*    border-radius: 10px;*/
+/*    padding: 10px 12px;*/
+/*}*/
+
+/*label {*/
+/*    display: block;*/
+/*    font-size: 14px;*/
+/*    margin-bottom: 8px;*/
+/*    color: #dce3ff;*/
+/*}*/
+
+/*.grid {*/
+/*    display: grid;*/
+/*    gap: 12px;*/
+/*}*/
+
+/*.muted {*/
+/*    color: var(--muted);*/
+/*}*/
+
+/*.error {*/
+/*    color: var(--danger);*/
+/*    margin-bottom: 12px;*/
+/*}*/
+
+/*.pill {*/
+/*    display: inline-block;*/
+/*    background: rgba(102, 226, 204, 0.15);*/
+/*    border: 1px solid rgba(102, 226, 204, 0.4);*/
+/*    color: #8ff3e2;*/
+/*    border-radius: 999px;*/
+/*    padding: 3px 10px;*/
+/*    font-size: 12px;*/
+/*    margin-right: 8px;*/
+/*}*/
+
+/*.question-card {*/
+/*    border: 1px solid var(--border);*/
+/*    border-radius: 12px;*/
+/*    padding: 14px;*/
+/*    background: rgba(255, 255, 255, 0.02);*/
+/*    margin-bottom: 14px;*/
+/*}*/
+
+/*.option-row {*/
+/*    margin: 8px 0;*/
+/*}*/
+
+/*.stats {*/
+/*    display: grid;*/
+/*    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.char-card {*/
+/*    border: 1px solid var(--border);*/
+/*    border-radius: 12px;*/
+/*    padding: 14px;*/
+/*    margin-bottom: 12px;*/
+/*    background: rgba(255, 255, 255, 0.02);*/
+/*}*/
+
+:root {
+    --bg: #0a0c14;
+    --panel: #141824;
+    --panel-2: #1b2133;
+
+    --text: #e8ecff;
+    --muted: #8f98b3;
+
+    --gold: #e7c873;
+    --gold-soft: rgba(231, 200, 115, 0.2);
+
+    --mana: #66aaff;
+    --mana-glow: rgba(102, 170, 255, 0.5);
+
+    --danger: #ff5b6e;
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+/* Base */
+body {
+    margin: 0;
+    font-family: "Inter", system-ui, sans-serif;
+
+    background:
+            radial-gradient(circle at 50% -20%, rgba(231,200,115,0.08), transparent 50%),
+            #0a0c14;
+
+    color: var(--text);
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Panels (like game windows) */
+.card {
+    background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    padding: 18px;
+
+    box-shadow:
+            0 8px 30px rgba(0,0,0,0.6),
+            inset 0 1px 0 rgba(255,255,255,0.05);
+
+    position: relative;
+}
+
+/* Fancy top border accent */
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Titles */
+h1, h2, h3 {
+    margin-top: 0;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 28px;
+    color: var(--gold);
+}
+
+h2 {
+    font-size: 20px;
+}
+
+/* Buttons (abilities style) */
+.btn, button {
+    border-radius: 10px;
+    padding: 10px 16px;
+
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    background: linear-gradient(180deg, #2a3355 0%, #1b213d 100%);
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn:hover, button:hover {
+    border-color: var(--mana);
+    box-shadow: 0 0 12px var(--mana-glow);
+    transform: translateY(-1px);
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, #3a4db3 0%, #2a3c91 100%);
+    border-color: #4c63ff;
+}
+
+/* Inputs */
+input, select {
+    width: 100%;
+    background: #0f1429;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 10px 12px;
+
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--mana);
+    box-shadow: 0 0 10px var(--mana-glow);
+}
+
+/* Labels */
+label {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Stats (core RPG feature) */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.stat {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.stat:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 12px var(--gold-soft);
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.stat-label {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Question cards (like quests/dialogue) */
+.question-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+
+    background: rgba(255,255,255,0.02);
+
+    margin-bottom: 14px;
+}
+
+/* Options */
+.option-row {
+    margin: 8px 0;
+    padding: 8px 10px;
+
+    border-radius: 8px;
+    border: 1px solid transparent;
+
+    transition: 0.2s;
+}
+
+.option-row:hover {
+    border-color: var(--mana);
+    background: rgba(102,170,255,0.08);
+}
+
+/* Character cards */
+.char-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+
+    background: rgba(255,255,255,0.02);
+
+    position: relative;
+}
+
+/* Rarity glow */
+.char-card.rare {
+    border-color: #4da6ff;
+    box-shadow: 0 0 15px rgba(77,166,255,0.3);
+}
+
+.char-card.epic {
+    border-color: #b36bff;
+    box-shadow: 0 0 18px rgba(179,107,255,0.35);
+}
+
+.char-card.legendary {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(231,200,115,0.4);
+}
+
+/* Pills (tags like class/race) */
+.pill {
+    display: inline-block;
+
+    background: rgba(231,200,115,0.12);
+    border: 1px solid var(--gold);
+
+    color: var(--gold);
+
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+
+    margin-right: 6px;
+}
+
+/* Error */
+.error {
+    color: var(--danger);
+}
+
+/* Layout */
+.row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.grid {
+    display: grid;
+    gap: 12px;
+}

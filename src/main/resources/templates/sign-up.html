@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="card" style="max-width: 520px; margin: 40px auto;">
+        <h1 class="text-center">Create Account</h1>
+
+        <div th:if="${param.success}" class="muted">
+            Account created successfully. You can sign in now.
+        </div>
+        <div th:if="${param.passwordError}" class="error">
+            Passwords do not match.
+        </div>
+        <div th:if="${param.emailError}" class="error">
+            This email is already registered.
+        </div>
+
+        <form method="post" th:action="@{/registration}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <div class="grid">
+                <div>
+                    <label>Email</label>
+                    <input name="user_email" type="email" required/>
+                </div>
+                <div>
+                    <label>Full name</label>
+                    <input name="user_full_name" type="text" required/>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input name="user_password" type="password" required/>
+                </div>
+                <div>
+                    <label>Repeat password</label>
+                    <input name="user_repeat_password" type="password" required/>
+                </div>
+                <button class="btn" type="submit">Sign up</button>
+            </div>
+        </form>
+
+        <p style="text-align: center; margin-top: 15px;">
+            Already have an account?
+            <a href="/login">Sign in</a>
+        </p>
+    </div>
+</div>
+</body>
+</html>

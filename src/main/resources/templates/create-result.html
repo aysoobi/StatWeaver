@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Result</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h1>Character Created</h1>
+        <p><a href="/create">Create another</a> | <a href="/library">Open library</a> | <a href="/">Main</a></p>
+
+        <h2 th:text="${character.name}"></h2>
+        <p>
+            <span class="pill">Type</span>
+            <strong th:text="${character.mainType}"></strong>
+            (<span th:text="${character.elfPercent}"></span>% Elf,
+            <span th:text="${character.dwarfPercent}"></span>% Dwarf,
+            <span th:text="${character.dragonPercent}"></span>% Dragon)
+        </p>
+
+        <p>
+            <span class="pill">Points</span>
+            Total: <strong th:text="${character.totalPoints}"></strong>,
+            Available: <strong th:text="${character.availablePoints}"></strong>
+        </p>
+
+        <div class="stats">
+            <div class="question-card">Intelligence: <strong th:text="${character.intelligence}"></strong></div>
+            <div class="question-card">Strength: <strong th:text="${character.strength}"></strong></div>
+            <div class="question-card">Defense: <strong th:text="${character.defense}"></strong></div>
+            <div class="question-card">Agility: <strong th:text="${character.agility}"></strong></div>
+            <div class="question-card">Magic: <strong th:text="${character.magic}"></strong></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
